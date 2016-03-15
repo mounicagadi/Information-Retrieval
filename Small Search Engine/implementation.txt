@@ -1,0 +1,24 @@
+Implementation of Indexer :
+
+The indexer.py accepts a corpus file. This file is split based on value '#' and stored in the dictionary. All the values before '#' are stored as docids and the values after
+'#' are stored as values of that particular docid in a dictionary. A simple indexer is created out of this dictionary dict_docs.
+We remove all the values for a particular docid which are only digits using a filter function.  After filtering the digits, we iterate through the items of the
+dict_docs dictionary. We will be storing the words and their docids and term frequencies in another dictionary words_freq. 
+We check if the values in dict_docs are present in a new dictionary words_freq. It picks a single term from values of dict_docs every time
+and checks if the term is present in words_freq dictionary. If present, then it checks if the docid is present
+for that particular term. If docid is present , increments words_freq[term][docid] by 1 else initializes the value
+to 1. If term is not present, initializes the value for a particular docid to be 1.
+We also calculate the length of the docid present in dict_docs simultaneously.
+The words_freq dictionary and dict_len dictionary which stores the length of the docids are returned to the main function.
+They are dumped in using json.
+
+
+Implementation of BM25.py
+
+The index.out file is read. All the words and its docid and term frequencies are stored in one variable. 
+The document lengths are stored in doc_lengths variable.
+The query file is given as input. All the queries in the file are split and each query is stored as terms of list in a list
+For each query, the document scores are calculated using the BM25 algorithm. For each term in the query, we check if that term
+is present in the indexer . If present then we store the docid and its frequency in a seperate dictionary. We calculate the score
+for each document with that term. 
+All the scores are stored in a list. We print the top 100 documents for each query rank wise.
